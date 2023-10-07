@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "781512659364",
+    "project_id": "ewaste-6dfd4",
+    "storage_bucket": "ewaste-6dfd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781512659364:android:fa26967b4fbda707037131",
+        "android_client_info": {
+          "package_name": "com.wahid.ewaste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7jkuPa48P-5PuH2OJhL04c5yWCMBYRE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
