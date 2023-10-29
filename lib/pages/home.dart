@@ -3,11 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plastic/pages/recycle.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:floating_navbar/floating_navbar.dart';
 
 
 final db = FirebaseFirestore.instance;
@@ -192,7 +189,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/background-blur-15.png'),
@@ -203,8 +200,8 @@ class _HomePageState extends State<HomePage> {
           physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top:12, bottom: 10),
+            const Padding(
+              padding: EdgeInsets.only(top:12, bottom: 10),
               child: Text(
                 "What is E-Waste?",
                 textAlign: TextAlign.center,
@@ -218,13 +215,13 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder(
               future: fetchReasons(), 
               builder: ((context, snapshot) {
-                if (ConnectionState.active != null && !snapshot.hasData) {
-                  return SizedBox(
+                if (!snapshot.hasData) {
+                  return const SizedBox(
+                    height: 75.0,
+                    width: 75.0,
                     child: Center(
                       child: CircularProgressIndicator()
                     ),
-                    height: 75.0,
-                    width: 75.0,
                   );
                 }
                 return Column(
@@ -236,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black.withOpacity(0.05),
                             spreadRadius: 15,
                             blurRadius: 50,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           )
                         ]
                       ),
@@ -268,7 +265,6 @@ class _HomePageState extends State<HomePage> {
                                       blurRadius: 25,
                                       spreadRadius: -5,
                                     )],
-                                    // color: Colors.white.withOpacity(0.15),
                                     borderRadius: BorderRadius.circular(25),
                                     border: Border.all(width: 1, color: Colors.white30)
                                   ),
@@ -288,53 +284,7 @@ class _HomePageState extends State<HomePage> {
                                 )
                               ),
                             )
-
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     // color: Colors.white,
-                          //     gradient: LinearGradient(
-                          //       begin: Alignment.topLeft,
-                          //       end: Alignment.bottomRight,
-                          //       colors: (index % 2 == 0) ? [
-                          //       Color.fromARGB(255, 0, 255, 119).withOpacity(0.1),
-                          //       Color.fromARGB(200, 50, 220, 100).withOpacity(0.1),
-                          //     ] : [
-                          //         Color.fromARGB(255, 90, 167, 116).withOpacity(0.3),
-                          //         Color.fromARGB(255, 109, 184, 134).withOpacity(0.3),
-                          //       ],
-                          //     ),
-                          //     border: Border.all(color: Colors.black, width: 3),
-                          //     borderRadius: BorderRadius.circular(16),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //         color: const Color(0xff1D1617).withOpacity(0.07),
-                          //         offset: const Offset(0, 10),
-                          //         blurRadius: 40,
-                          //         spreadRadius: 0
-                          //       )
-                          //     ]
-                          //   ),
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.all(12.0),
-                          //     child: Center(
-                          //       child: Text(snapshot.data![index].text,
-                          //       textAlign: TextAlign.center,
-                          //       style: const TextStyle(
-                          //         fontWeight: FontWeight.w500,
-                          //         color: Colors.black,
-                          //         fontSize: 16
-                      
-                          //       ),
-                          //     )),
-                          //   )
-                          
-                          // )
                         ),
-                        // separatorBuilder: (context, index) => const SizedBox(width: 25,),
-                        // padding: const EdgeInsets.only(
-                        //   left: 20,
-                        //   right: 20
-                        // ),
                         itemCount: snapshot.data!.length,
                         options: CarouselOptions(
                           scrollDirection: Axis.horizontal,
@@ -357,7 +307,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             width: 10.0,
                             height: 10.0,
-                            margin: EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
+                            margin: const EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: (Colors.white)
@@ -369,8 +319,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 );
               })),
-            Padding(
-              padding: const EdgeInsets.only(top:25, bottom: 10),
+            const Padding(
+              padding: EdgeInsets.only(top:25, bottom: 10),
               child: Text(
                 "How to Recycle E-Waste",
                 textAlign: TextAlign.center,
@@ -384,13 +334,13 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder(
               future: fetchSteps(), 
               builder: ((context, snapshot) {
-                if (ConnectionState.active != null && !snapshot.hasData) {
-                  return SizedBox(
+                if (!snapshot.hasData) {
+                  return const SizedBox(
+                    height: 75.0,
+                    width: 75.0,
                     child: Center(
                       child: CircularProgressIndicator()
                     ),
-                    height: 75.0,
-                    width: 75.0,
                   );
                 }
                 return Column(
@@ -402,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black.withOpacity(0.05),
                             spreadRadius: 15,
                             blurRadius: 50,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           )
                         ]
                       ),
@@ -436,7 +386,6 @@ class _HomePageState extends State<HomePage> {
                                     blurRadius: 25,
                                     spreadRadius: -5,
                                   )],
-                                  // color: Colors.white.withOpacity(0.15),
                                   borderRadius: BorderRadius.circular(25),
                                   border: Border.all(width: 1, color: Colors.white30)
                                 ),
@@ -456,53 +405,7 @@ class _HomePageState extends State<HomePage> {
                               )
                             ),
                           )
-
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     // color: Colors.white,
-                          //     gradient: LinearGradient(
-                          //       begin: Alignment.topLeft,
-                          //       end: Alignment.bottomRight,
-                          //       colors: (index % 2 == 0) ? [
-                          //       Color.fromARGB(255, 0, 255, 119).withOpacity(0.1),
-                          //       Color.fromARGB(200, 50, 220, 100).withOpacity(0.1),
-                          //     ] : [
-                          //         Color.fromARGB(255, 90, 167, 116).withOpacity(0.3),
-                          //         Color.fromARGB(255, 109, 184, 134).withOpacity(0.3),
-                          //       ],
-                          //     ),
-                          //     border: Border.all(color: Colors.black, width: 3),
-                          //     borderRadius: BorderRadius.circular(16),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //         color: const Color(0xff1D1617).withOpacity(0.07),
-                          //         offset: const Offset(0, 10),
-                          //         blurRadius: 40,
-                          //         spreadRadius: 0
-                          //       )
-                          //     ]
-                          //   ),
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.all(12.0),
-                          //     child: Center(
-                          //       child: Text(snapshot.data![index].text,
-                          //       textAlign: TextAlign.center,
-                          //       style: const TextStyle(
-                          //         fontWeight: FontWeight.w500,
-                          //         color: Colors.black,
-                          //         fontSize: 16
-                      
-                          //       ),
-                          //     )),
-                          //   )
-                          
-                          // )
                         ),
-                        // separatorBuilder: (context, index) => const SizedBox(width: 25,),
-                        // padding: const EdgeInsets.only(
-                        //   left: 20,
-                        //   right: 20
-                        // ),
                         itemCount: snapshot.data!.length,
                         options: CarouselOptions(
                           scrollDirection: Axis.horizontal,
@@ -525,7 +428,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             width: 10.0,
                             height: 10.0,
-                            margin: EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
+                            margin: const EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: (Colors.white)
@@ -537,8 +440,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 );
               })),
-            Padding(
-              padding: const EdgeInsets.only(top:25, bottom: 10),
+            const Padding(
+              padding: EdgeInsets.only(top:25, bottom: 10),
               child: Text(
                 "E-Waste Facts",
                 textAlign: TextAlign.center,
@@ -552,13 +455,13 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder(
               future: fetchFacts(), 
               builder: ((context, snapshot) {
-                if (ConnectionState.active != null && !snapshot.hasData) {
-                  return SizedBox(
+                if (!snapshot.hasData) {
+                  return const SizedBox(
+                    height: 75.0,
+                    width: 75.0,
                     child: Center(
                       child: CircularProgressIndicator()
                     ),
-                    height: 75.0,
-                    width: 75.0,
                   );
                 }
                 return Column(
@@ -570,7 +473,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black.withOpacity(0.05),
                             spreadRadius: 15,
                             blurRadius: 50,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           )
                         ]
                       ),
@@ -603,7 +506,6 @@ class _HomePageState extends State<HomePage> {
                                     blurRadius: 25,
                                     spreadRadius: -5,
                                   )],
-                                  // color: Colors.white.withOpacity(0.15),
                                   borderRadius: BorderRadius.circular(25),
                                   border: Border.all(width: 1, color: Colors.white30)
                                 ),
@@ -619,7 +521,6 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white60,
                                           fontSize: 18
-                          
                                         ),
                                       )),
                                     ),
@@ -637,7 +538,6 @@ class _HomePageState extends State<HomePage> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(25),
-                                            // border: Border.all(width: 0.5, color: Colors.white30),
                                             gradient: LinearGradient(
                                               begin: Alignment.topLeft,
                                               end: Alignment.bottomRight,
@@ -651,45 +551,20 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.green.withOpacity(0.4),
                                                 spreadRadius: 3,
                                                 blurRadius: 20,
-                                                offset: Offset(0, 3),
+                                                offset: const Offset(0, 3),
                                               )
                                             ]
                                           ),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               "Learn More",
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.white54,
                                                   fontSize: 16 
                                                 ),
                                             ),
                                           )
-                                          // child: ElevatedButton(
-                                          //   onPressed: () async {
-                                          //   final Uri url = Uri.parse(snapshot.data![index].link);
-                                          //   if (!await launchUrl(url)) {
-                                          //         throw Exception('Could not launch $url');
-                                          //     }
-                                          // }, 
-                                          // style: ElevatedButton.styleFrom(
-                                          //   backgroundColor: Colors.transparent,
-                                          //   // backgroundColor: Colors.green.withOpacity(0.2),
-                                          //   shape: RoundedRectangleBorder(
-                                          //     borderRadius: BorderRadius.circular(25)
-                                          //   )
-                                          //   // backgroundColor: Color.fromARGB(255, 0, 122, 57).withOpacity(0.05),
-                                          //   // shadowColor: Colors.transparent,
-                                          //   // side: BorderSide(width: 2, color: Colors.black),
-                                          // ),
-                                          // child: Text(
-                                          //   "Learn More",
-                                          //   style: const TextStyle(
-                                          //       fontWeight: FontWeight.w500,
-                                          //       color: Colors.white54,
-                                          //       fontSize: 16 
-                                          //     )
-                                          // )),
                                         ),
                                       ),
                                     )
@@ -698,83 +573,6 @@ class _HomePageState extends State<HomePage> {
                               )
                             ),
                           )
-
-
-
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     // color: Colors.white,
-                          //     gradient: LinearGradient(
-                          //       begin: Alignment.topLeft,
-                          //       end: Alignment.bottomRight,
-                          //       colors: [
-                          //         Color.fromARGB(255, 0, 255, 119).withOpacity(0.1),
-                          //         Color.fromARGB(200, 50, 220, 100).withOpacity(0.1),
-                          //       ],
-                          //     ),
-                          //     border: Border.all(color: Colors.black, width: 3),
-                          //     borderRadius: BorderRadius.circular(16),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //         color: const Color(0xff1D1617).withOpacity(0.07),
-                          //         offset: const Offset(0, 10),
-                          //         blurRadius: 40,
-                          //         spreadRadius: 0
-                          //       )
-                          //     ]
-                          //   ),
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       Padding(
-                          //         padding: const EdgeInsets.all(12.0),
-                          //         child: Center(
-                          //           child: Text(snapshot.data![index].text,
-                          //           textAlign: TextAlign.center,
-                          //           style: const TextStyle(
-                          //             fontWeight: FontWeight.w500,
-                          //             color: Colors.black,
-                          //             fontSize: 16
-                      
-                          //           ),
-                          //         )),
-                          //       ),
-                          //       Container(
-                          //         decoration: BoxDecoration(
-                          //           boxShadow: [
-                          //             BoxShadow(
-                          //               color: Colors.green.withOpacity(0.2),
-                          //               spreadRadius: 3,
-                          //               blurRadius: 20,
-                          //               offset: Offset(0, 3),
-                          //             )
-                          //           ]
-                          //         ),
-                          //         child: ElevatedButton(onPressed: () async {
-                          //           final Uri url = Uri.parse(snapshot.data![index].link);
-                          //           if (!await launchUrl(url)) {
-                          //                 throw Exception('Could not launch $url');
-                          //             }
-                          //         }, 
-                          //         style: ElevatedButton.styleFrom(
-                          //           backgroundColor: Color.fromARGB(255, 0, 122, 57).withOpacity(0.05),
-                          //           // shadowColor: Colors.transparent,
-                          //           // side: BorderSide(width: 2, color: Colors.black),
-                          //         ),
-                          //         child: Text(
-                          //           "Learn More",
-                          //           style: const TextStyle(
-                          //               fontWeight: FontWeight.w500,
-                          //               color: Colors.black,
-                          //               fontSize: 16
-                                                  
-                          //             )
-                          //         )),
-                          //       )
-                          //     ],
-                          //   )
-                          
-                          // )
                         ),
                         itemCount: snapshot.data!.length,
                         options: CarouselOptions(
@@ -797,7 +595,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             width: 10.0,
                             height: 10.0,
-                            margin: EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
+                            margin: const EdgeInsets.only(top: 12.0, left: 4.0, right: 4),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: (Colors.white)
@@ -808,72 +606,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 );
-              })),
-              
-              SizedBox(height: 25),
-              
-            // FutureBuilder(
-            //   future: fetchFacts(), 
-            //   builder: ((context, snapshot) {
-            //     if (ConnectionState.active != null && !snapshot.hasData) {
-            //       return SizedBox(
-            //         child: Center(
-            //           child: CircularProgressIndicator()
-            //         ),
-            //         height: 75.0,
-            //         width: 75.0,
-            //       );
-            //     }
-            //     return ListView.separated(
-            //       physics: ClampingScrollPhysics(),
-            //       shrinkWrap: true,
-            //       itemBuilder: ((context, index) {
-            //         return Container(
-            //           decoration: BoxDecoration(
-            //             // color: Colors.white,
-            //             gradient: LinearGradient(
-            //                 begin: Alignment.topLeft,
-            //                 end: Alignment.bottomRight,
-            //                 colors: [
-            //                   Color.fromARGB(255, 0, 255, 119).withOpacity(0.4),
-            //                   Color.fromARGB(200, 50, 220, 100).withOpacity(0.4),
-            //                 ],
-            //               ),
-            //             border: Border.all(color: Colors.black, width: 3),
-            //             borderRadius: BorderRadius.circular(16),
-            //             boxShadow: [
-            //               BoxShadow(
-            //                 color: const Color(0xff1D1617).withOpacity(0.07),
-            //                 offset: const Offset(0, 10),
-            //                 blurRadius: 40,
-            //                 spreadRadius: 0
-            //               )
-            //             ]
-            //           ),
-            //           child: Padding(
-            //             padding: const EdgeInsets.all(12.0),
-            //             child: Center(
-            //               child: Text(snapshot.data![index].text,
-            //               textAlign: TextAlign.center,
-            //               style: const TextStyle(
-            //                 fontWeight: FontWeight.w500,
-            //                 color: Colors.black,
-            //                 fontSize: 16
-      
-            //               ),
-            //             )),
-            //           )
-                    
-            //         );
-            //       }),
-            //       separatorBuilder: (context, index) => const SizedBox(height: 25,),
-            //       padding: const EdgeInsets.only(
-            //         left: 20,
-            //         right: 20
-            //       ),
-            //       itemCount: snapshot.data!.length,
-            //     );
-            //   })),
+              })), 
+              const SizedBox(height: 25),
           ],
         ),
       ),

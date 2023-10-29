@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plastic/pages/home.dart';
-import 'package:http/http.dart' as http;
 import 'package:plastic/pages/results.dart';
 
 class Recycle extends StatelessWidget {
@@ -66,7 +65,7 @@ class Recycle extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation1, animation2) =>
-                          HomePage(),
+                          const HomePage(),
                       transitionDuration: Duration.zero,
                       reverseTransitionDuration: Duration.zero,
                     ),
@@ -77,7 +76,7 @@ class Recycle extends StatelessWidget {
         ),
       ),
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/background-blur-15.png'),
@@ -142,15 +141,14 @@ class Recycle extends StatelessWidget {
                         return null;
                       },
                       controller: materialText,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
-                          // color: Color.fromARGB(255, 199, 196, 196),
                           fontSize: 16),
                       cursorColor: Colors.white70,
                       decoration: InputDecoration(
                           errorMaxLines: 2,
                           errorStyle:
-                              TextStyle(color: Colors.white70, fontSize: 14),
+                              const TextStyle(color: Colors.white70, fontSize: 14),
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(
@@ -160,7 +158,7 @@ class Recycle extends StatelessWidget {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -172,19 +170,19 @@ class Recycle extends StatelessWidget {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           isDense: true),
                     ),
                   ]),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                       top: 30.0, left: 10, bottom: 15, right: 10),
                   child: Text(
                     "What is your zip code?",
@@ -238,9 +236,9 @@ class Recycle extends StatelessWidget {
                         return null;
                       },
                       controller: postalText,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                       keyboardType:
-                          TextInputType.numberWithOptions(signed: true),
+                          const TextInputType.numberWithOptions(signed: true),
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly
                       ],
@@ -248,7 +246,7 @@ class Recycle extends StatelessWidget {
                       decoration: InputDecoration(
                           errorMaxLines: 2,
                           errorStyle:
-                              TextStyle(color: Colors.white70, fontSize: 14),
+                              const TextStyle(color: Colors.white70, fontSize: 14),
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(
@@ -258,7 +256,7 @@ class Recycle extends StatelessWidget {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -270,12 +268,12 @@ class Recycle extends StatelessWidget {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide:
-                                BorderSide(color: Colors.white30, width: 2),
+                                const BorderSide(color: Colors.white30, width: 2),
                           ),
                           isDense: true),
                     ),
@@ -288,7 +286,7 @@ class Recycle extends StatelessWidget {
                       color: Colors.black.withOpacity(0.1),
                       spreadRadius: 3,
                       blurRadius: 40,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     )
                   ]),
                   child: Container(
@@ -297,7 +295,7 @@ class Recycle extends StatelessWidget {
                         color: Colors.green.withOpacity(0.2),
                         spreadRadius: 3,
                         blurRadius: 20,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       )
                     ]),
                     child: ElevatedButton(
@@ -313,16 +311,14 @@ class Recycle extends StatelessWidget {
                             );
                           }
                         },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 123, 159, 129),
+                        ),
                         child: const Text("Submit",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
-                                fontSize: 16)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 123, 159, 129),
-                          // shadowColor: Colors.transparent,
-                          // side: BorderSide(width: 2, color: Colors.black),
-                        )),
+                                fontSize: 16))),
                   ),
                 ),
               ],

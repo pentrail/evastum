@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 
 
 class Place {
@@ -39,7 +38,7 @@ class LocationDetail {
   });
 }
 
-final String apiKey = "fb6e25a7115ed1c8";
+const String apiKey = "fb6e25a7115ed1c8";
 
 class Results extends StatefulWidget {
 
@@ -64,39 +63,31 @@ class _ResultsState extends State<Results> {
 
 
     final presponse = Uri.parse(
-          'http://api.earth911.com/earth911.getPostalData?api_key=' + apiKey
-          + '&country=US&postal_code=' + widget.postalText);
+          'http://api.earth911.com/earth911.getPostalData?api_key=$apiKey&country=US&postal_code=${widget.postalText}');
     final presponseInfo = await http.read(presponse);
     Map<String, dynamic> pmap = jsonDecode(presponseInfo);
-    // setState(() {
-      longitude = pmap["result"]["longitude"];
-      latitude = pmap["result"]["latitude"];
-    // });
-
+    
+    longitude = pmap["result"]["longitude"];
+    latitude = pmap["result"]["latitude"];
 
     final mresponse = Uri.parse(
-          'http://api.earth911.com/earth911.searchMaterials?api_key=' + apiKey
-          + '&query=' + widget.material);
+          'http://api.earth911.com/earth911.searchMaterials?api_key=$apiKey&query=${widget.material}');
     final mresponseInfo = await http.read(mresponse);
     Map<String, dynamic> mmap = jsonDecode(mresponseInfo);
 
     int j = 0;
     for (var _ in mmap["result"]) {
       if (j < 6) {
-        // setState(() {
-          materialIds.add(mmap["result"][j]["material_id"]);
-        // });
+        materialIds.add(mmap["result"][j]["material_id"]);
       }
       j++;
     }
 
 
-    String link = 'http://api.earth911.com/earth911.searchLocations?api_key=' + apiKey
-          + '&latitude=' + latitude.toString() + '&longitude=' + longitude.toString()
-          + '&max_distance=25';
+    String link = 'http://api.earth911.com/earth911.searchLocations?api_key=$apiKey&latitude=$latitude&longitude=$longitude&max_distance=25';
 
     for (var e in materialIds) {
-      link = link + '&material_id=' + e.toString();
+      link = '$link&material_id=$e';
     }
 
     final response = Uri.parse(link);
@@ -107,15 +98,13 @@ class _ResultsState extends State<Results> {
     for (var _ in map["result"]) {
 
       if (i < 9) {
-        // await geoCode.reverseGeocoding(latitude: map["result"][i]["latitude"], longitude: map["result"][i]["longitude"]);
 
           Place place = Place(
-          name: map["result"][i]["description"], 
-          distance: map["result"][i]["distance"], 
-          longitude: map["result"][i]["longitude"], 
-          latitude: map["result"][i]["latitude"],
-          locationId: map["result"][i]["location_id"]
-          // city: address.city
+            name: map["result"][i]["description"], 
+            distance: map["result"][i]["distance"], 
+            longitude: map["result"][i]["longitude"], 
+            latitude: map["result"][i]["latitude"],
+            locationId: map["result"][i]["location_id"]
           );
           
           places.add(place);
@@ -129,21 +118,20 @@ class _ResultsState extends State<Results> {
 
   }
 
-  Future<LocationDetail> fetchLocationDetails(String location_id) async {
-    String link = 'http://api.earth911.com/earth911.getLocationDetails?api_key=' + apiKey
-          + '&location_id=' + location_id;
+  Future<LocationDetail> fetchLocationDetails(String locationId) async {
+    String link = 'http://api.earth911.com/earth911.getLocationDetails?api_key=$apiKey&location_id=$locationId';
 
     final response = Uri.parse(link);
     final responseInfo = await http.read(response);
     Map<String, dynamic> map = jsonDecode(responseInfo);
 
-    String acceptedMaterials = map["result"][location_id]["materials"][0]["description"];
+    String acceptedMaterials = map["result"][locationId]["materials"][0]["description"];
 
-    for (int i = 1; i<map["result"][location_id]["materials"].length; i++) {
-      acceptedMaterials = acceptedMaterials + ", " + (map["result"][location_id]["materials"][i]["description"]);
+    for (int i = 1; i<map["result"][locationId]["materials"].length; i++) {
+      acceptedMaterials = "$acceptedMaterials, " + (map["result"][locationId]["materials"][i]["description"]);
     }
 
-    return await LocationDetail(address: map["result"][location_id]["address"], city: map["result"][location_id]["city"], url: map["result"][location_id]["url"], phone: map["result"][location_id]["phone"], materials: acceptedMaterials);
+    return LocationDetail(address: map["result"][locationId]["address"], city: map["result"][locationId]["city"], url: map["result"][locationId]["url"], phone: map["result"][locationId]["phone"], materials: acceptedMaterials);
   }
   
   late Future<List<Place>> places;
@@ -176,8 +164,8 @@ class _ResultsState extends State<Results> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
-        iconTheme: IconThemeData(
-          color: Colors.white70, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white70,
         ),
         flexibleSpace: ClipRect(
           child: BackdropFilter(
@@ -190,7 +178,7 @@ class _ResultsState extends State<Results> {
         ),
       ),
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/background-9.png'),
@@ -204,19 +192,19 @@ class _ResultsState extends State<Results> {
             FutureBuilder(
               future: places,
               builder:(context, snapshot) {
-                if (ConnectionState.active != null && !snapshot.hasData) {
-                  return SizedBox(
+                if (!snapshot.hasData) {
+                  return const SizedBox(
+                    height: 200.0,
+                    width: 200.0,
                     child: Center(
                       child: CircularProgressIndicator()
                     ),
-                    height: 200.0,
-                    width: 200.0,
                   );              
                 }
                 return ListView.separated(
                     itemCount: snapshot.data!.length,
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     separatorBuilder: (context, index) => const SizedBox(height: 25,),
                     padding: const EdgeInsets.only(
                       left: 20,
@@ -270,10 +258,9 @@ class _ResultsState extends State<Results> {
                                         ),
                                         FutureBuilder(
                                           future: fetchLocationDetails(snapshot.data![index].locationId),
-                                          // future: fetchCity(snapshot.data![index].latitude, snapshot.data![index].longitude),
                                           builder: (context, snapshot) {
                               
-                                            if (ConnectionState.active != null && !snapshot.hasData) {
+                                            if (!snapshot.hasData) {
                                               return const Text( 'Loading city information...',
                                               style: TextStyle(
                                                 color: Colors.white60,
@@ -303,7 +290,6 @@ class _ResultsState extends State<Results> {
                     },
                   );
               },
-              
             ),
             const SizedBox(height: 25,),
           ]
