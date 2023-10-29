@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:plastic/auth/api_key.dart';
 
 
 class Place {
@@ -38,7 +39,7 @@ class LocationDetail {
   });
 }
 
-const String apiKey = "fb6e25a7115ed1c8";
+// const String apiKey = "fb6e25a7115ed1c8";
 
 class Results extends StatefulWidget {
 
