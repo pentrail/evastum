@@ -44,5 +44,4 @@ app.*.map.json
 /android/app/release
 
 # Obfuscation related
-/lib/firebase_options.dart
 /lib/auth/api_key.dart
