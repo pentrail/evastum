@@ -1,9 +1,9 @@
-# eVastum | Congressional App Challenge
+# eVastum
 
 ## Tools Used
 
 App Programming:
-  - 🛠️ IDE: VSCodium
+  - 🛠️ IDE: VSCode
   - 💬 Language: Dart
   - 🧰 Tookit: Flutter
   - 📙 Database: Firebase
